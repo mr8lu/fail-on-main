@@ -1,0 +1,24 @@
+name: Fail on main
+description: Exit workflow if GH action is targeting main branch
+inputs:
+  current-ref:
+    description: 'The branch github action is executing on'
+    required: true
+    type: string
+
+  sanction-ref:
+    description: 'The branch you do want the workflow to run on'
+    required: true
+    default: 'refs/heads/main'
+runs:
+  using: 'composite'
+  steps:
+    - name: Check branch name
+      id: check_branch_name
+      run: |
+        if [[ "${{ github.ref }}" == "refs/heads/main" ]]; then
+          echo "Error: Workflow cannot proceed on the main branch."
+          exit 1
+        fi
+      shell: bash
+
