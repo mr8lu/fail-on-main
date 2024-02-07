@@ -1,5 +1,8 @@
 name: Fail on main
 description: Exit workflow if GH action is targeting main branch
+branding:
+  icon: 'alert-triangle'
+  color: 'red'
 runs:
   using: 'composite'
   steps:
